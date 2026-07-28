@@ -1,0 +1,1 @@
+wpkh([0f3eb633/84h/1h/0h]tpubDC5oAMiDu64y9NVedBwjSCeSVsJtcdtg5ioi5zXFwbczbPmTEYz5Y8eUVCgd2FhBSuZNBnFidberx3phCnmQ6BiYWi12foisU2Q4YPL4b1A/0/*)#tm5v3l3x
