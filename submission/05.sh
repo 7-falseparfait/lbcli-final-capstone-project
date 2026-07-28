@@ -2,8 +2,8 @@
 
 TXID="b71fb9ab7707407cc7265591e0c0d47d07afede654f91de1f63c0cb522914bcb"
 
-# Get the transaction details
-TX_DETAILS=$(bitcoin-cli -signet getrawtransaction "$TXID" 1 2>/dev/null)
+# Get the transaction with prevout info
+TX_DETAILS=$(bitcoin-cli -signet getrawtransaction "$TXID" 2 2>/dev/null)
 
 if [ -z "$TX_DETAILS" ]; then
   echo "Error: Could not fetch transaction details for TXID $TXID"
