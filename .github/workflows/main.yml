@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6  # Check out the repository code
-          
+
       - name: Setup, Get Block & Verify Submissions
         run: |
           # Setup Bitcoin Core
@@ -22,7 +22,7 @@ jobs:
 
           mkdir -p ~/.bitcoin
           echo "signet=1" >> ~/.bitcoin/bitcoin.conf
-          echo "rpcconnect=161.35.161.124" >> ~/.bitcoin/bitcoin.conf
+          echo "rpcconnect=167.172.185.136" >> ~/.bitcoin/bitcoin.conf
           echo "rpcuser=btrustbuildersrpc" >> ~/.bitcoin/bitcoin.conf
           echo "rpcpassword=btrustbuilderspass" >> ~/.bitcoin/bitcoin.conf
 
@@ -132,7 +132,7 @@ jobs:
 
           WALLET=$(cat submission/wallet.txt | tr -d '\n')
           echo "wallet=$WALLET" >> $GITHUB_OUTPUT
-      
+
           STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://github.com/$WALLET)
           if [[ "$STATUS_CODE" == "200" ]]; then
             echo "✅ GitHub profile exists: https://github.com/$WALLET"
