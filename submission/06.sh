@@ -1,13 +1,14 @@
-#!/bin/bash
 BLOCK_HEIGHT=243821
 
-BLOCK_HASH=$(bitcoin-cli -signet getblockhash $BLOCK_HEIGHT)
+RPC_CMD="bitcoin-cli -signet -rpcuser=btrustbuildersrpc -rpcpassword=btrustbuilderspass -rpcconnect=167.172.185.136 -rpcport=38332"
+
+BLOCK_HASH=$($RPC_CMD getblockhash $BLOCK_HEIGHT)
 
 # Use verbosity 1 to get txids only
-TX_IDS=$(bitcoin-cli -signet getblock "$BLOCK_HASH" 1 | jq -r '.tx[]')
+TX_IDS=$($RPC_CMD getblock "$BLOCK_HASH" 1 | jq -r '.tx[]')
 
 for TXID in $TX_IDS; do
-  TX_DETAILS=$(bitcoin-cli -signet getrawtransaction "$TXID" 1 2>/dev/null)
+  TX_DETAILS=$($RPC_CMD getrawtransaction "$TXID" 1 2>/dev/null)
   RBF=$(echo "$TX_DETAILS" | jq -r '.vin[] | select(.sequence < 4294967295) | .sequence' 2>/dev/null | head -1)
   if [ ! -z "$RBF" ]; then
     echo "$TXID"
